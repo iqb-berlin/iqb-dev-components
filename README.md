@@ -9,7 +9,7 @@ This is a library of recurrent components for developing WebApp Projects of the 
 
 ### Install
 ```
-npm install iqb-dev-components
+npm install --save-dev iqb-dev-components
 ```
 
 
