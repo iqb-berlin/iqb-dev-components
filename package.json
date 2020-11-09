@@ -1,6 +1,6 @@
 {
   "name": "iqb-dev-components",
-  "version": "1.0.0",
+  "version": "0.0.2",
   "description": "Code to use for use in development of IQB software, like Verona Players.",
   "main": "index.js",
   "scripts": {
