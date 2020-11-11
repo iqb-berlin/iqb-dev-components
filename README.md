@@ -1,5 +1,6 @@
 [![npm](https://img.shields.io/npm/v/iqb-components.svg?style=flat-square)](https://www.npmjs.com/package/iqb-components)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square)](LICENSE)
+![GitHub package.json version](https://img.shields.io/github/package-json/v/iqb-berlin/verona-player-simple?style=flat-square)
 
 # IQB Dev Components
 
