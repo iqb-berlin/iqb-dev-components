@@ -1,10 +1,14 @@
-exports.recordMessages = (webdriver) =>
-    webdriver.executeScript(() => {
-        window['__messageRecorder__'] = [];
-        window.addEventListener("message", e => window['__messageRecorder__'].push(e.data));
-    });
+exports.recordMessages = (webdriver, type) =>
+    webdriver.executeScript(type => {
+        window.__messageRecorder__ = [];
+        window.addEventListener("message", e => {
+            if (!type || (type === e.data.type)) {
+                window.__messageRecorder__.push(e.data);
+            }
+        });
+    }, type);
 
-exports.getLastMessage = (webdriver, timeout = 150) =>
+exports.getLastMessage = (webdriver, timeout = 3000) =>
     webdriver.executeScript(timeout => new Promise(resolve => {
         if (window.__messageRecorder__.length) {
             resolve(window.__messageRecorder__[window.__messageRecorder__.length - 1]);
