@@ -1,3 +1,7 @@
+exports.messageRecorderSettings = {
+    defaultTimeout: 150
+}
+
 exports.recordMessages = (webdriver, type) =>
     webdriver.executeScript(type => {
         window.__messageRecorder__ = [];
@@ -8,8 +12,9 @@ exports.recordMessages = (webdriver, type) =>
         });
     }, type);
 
-exports.getLastMessage = (webdriver, timeout = 3000) =>
+exports.getLastMessage = (webdriver, timeout = exports.messageRecorderSettings.defaultTimeout) =>
     webdriver.executeScript(timeout => new Promise(resolve => {
+        console.log(timeout);
         if (window.__messageRecorder__.length) {
             resolve(window.__messageRecorder__[window.__messageRecorder__.length - 1]);
         } else {
