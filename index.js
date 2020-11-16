@@ -2,7 +2,7 @@ exports.messageRecorderSettings = {
     defaultTimeout: 150
 }
 
-exports.recordMessages = (webdriver, type) =>
+exports.recordMessages = (webdriver, type = null) =>
     webdriver.executeScript(type => {
         window.__messageRecorder__ = [];
         window.addEventListener("message", e => {
