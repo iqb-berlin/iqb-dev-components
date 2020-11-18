@@ -26,3 +26,5 @@ exports.getLastMessage = (webdriver, timeout = exports.messageRecorderSettings.d
             }, timeout);
         }
     }), timeout);
+
+exports.getAllMessages = webdriver => webdriver.executeScript(() => window.__messageRecorder__);
