@@ -1,6 +1,18 @@
+/*
+This script packs the source files of a web project (html, js and css) into
+one self contained html file. It includes the source code of all referenced
+files and generates base64 representations for all images, which are included.
 
-// possible improvements:
-// - ignore comments when matching regex
+Usage:
+node distpacker.js <directory containing html and source files>
+
+Author:
+- Andreas Fleck
+- Richard Henck (richard.henck@iqb.hu-berlin.de)
+
+possible improvements:
+- ignore comments when matching regex
+*/
 
 const fs = require('fs')
 const existsSync = fs.existsSync;
