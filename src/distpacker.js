@@ -153,5 +153,5 @@ htmlString = replaceScriptTags(htmlString);
 htmlString = replaceBaseHREF(htmlString);
 
 // write new index.html
-writeFileSync(`${folder}index_packed2.html`, htmlString, 'utf8');
-console.log(`finished, wrote packed index_packed2.html to:${folder}`);
+writeFileSync(`${folder}index_packed.html`, htmlString, 'utf8');
+console.log(`finished, wrote packed index_packed.html to:${folder}`);
