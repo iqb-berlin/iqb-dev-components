@@ -142,7 +142,7 @@ if (!folder.endsWith(folderseperator)) {
   folder += folderseperator;
 }
 
-console.log(`run iqb-distpacker in ${folder}`);
+console.log(`Running iqb-distpacker in folder: ${folder}`);
 
 let htmlString = readFileSync(`${folder}index.html`, 'utf8').toString();
 
@@ -154,4 +154,4 @@ htmlString = replaceBaseHREF(htmlString);
 
 // write new index.html
 writeFileSync(`${folder}index_packed.html`, htmlString, 'utf8');
-console.log(`finished, wrote packed index_packed.html to:${folder}`);
+console.log(`finished, wrote packed index_packed.html to: ${folder}`);
