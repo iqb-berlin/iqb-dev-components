@@ -14,7 +14,8 @@ possible improvements:
 - ignore comments when matching regex
 */
 
-const fs = require('fs')
+const fs = require('fs');
+
 const existsSync = fs.existsSync;
 const readFileSync = fs.readFileSync;
 const writeFileSync = fs.writeFileSync;
@@ -70,7 +71,7 @@ function replaceLinkedAssetsInJS(jsString) {
     logDebug(`Replacing linked assets in JS: ${a}`);
 
     const firstSign = a[0];
-    const src = a.replace(/\'/gi, "").replace(/\"/gi, "").replace("./", "");
+    const src = a.replace(/\'/gi, '').replace(/\"/gi, '').replace('./', '');
     const ext = getExtension(b);
 
     try {

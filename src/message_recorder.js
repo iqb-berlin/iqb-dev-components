@@ -1,7 +1,7 @@
 module.exports = {
   defaultWaitingTime: 150,
 
-  recordMessages: function(webdriver) {
+  recordMessages(webdriver) {
     webdriver.executeScript(() => {
       window.__messageRecorder__ = {
         'all': [],
@@ -15,7 +15,7 @@ module.exports = {
     });
   },
 
-  getLastMessage: function(webdriver, type = null, waitingTime = this.defaultWaitingTime) {
+  getLastMessage(webdriver, type = null, waitingTime = this.defaultWaitingTime) {
     return webdriver.executeScript(
       (type, waitingTime) => new Promise(resolve => {
         const popLastMessage = () => {
@@ -40,7 +40,7 @@ module.exports = {
     )
   },
 
-  getAllMessages: function(webdriver, type) {
+  getAllMessages(webdriver, type) {
     webdriver.executeScript(
       type => window.__messageRecorder__.all.filter(msg => !type || (msg.type === type)),
       type
