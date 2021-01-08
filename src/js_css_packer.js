@@ -9,30 +9,27 @@ Author:
 - Martin Mechtel (mechtel@iqb.hu-berlin.de)
 - Richard Henck (richard.henck@iqb.hu-berlin.de)
 */
-
 const fs = require('fs');
 
-const { readFileSync } = fs;
-const { writeFileSync } = fs;
+const sourceFolder = process.argv[2];
+const projectName = process.argv[3];
 
-const applicationFolder = `${__dirname}/../../`;
-const args = process.argv;
-const sourceFolder = `${applicationFolder}dist/${args[2]}/`;
-const targetFileNameJs = `${applicationFolder}src/app/${args[2]}/${args[2]}.js`;
-const targetFileNameCss = `${applicationFolder}src/app/${args[2]}/${args[2]}.css`;
+const targetFileNameJs = `src/app/${projectName}/${projectName}.js`;
+const targetFileNameCss = `src/app/${projectName}/${projectName}.css`;
+
 let fileContentJs = '';
 let fileContentCss = '';
 
-fs.readdirSync(sourceFolder).forEach(file => {
+fs.readdirSync(`${sourceFolder}/${projectName}`).forEach(file => {
   const i = file.lastIndexOf('.');
   if (i > 0) {
     const fileExtension = file.substr(i + 1);
     if (fileExtension.toLowerCase() === 'css') {
-      const fileContent = readFileSync(`${sourceFolder}${file}`, 'utf8').toString();
+      const fileContent = fs.readFileSync(`${sourceFolder}/${projectName}/${file}`, 'utf8').toString();
       console.log(`reading ${file}`);
       fileContentCss += fileContent;
     } else if (fileExtension.toLowerCase() === 'js') {
-      const fileContent = readFileSync(`${sourceFolder}${file}`, 'utf8').toString();
+      const fileContent = fs.readFileSync(`${sourceFolder}/${projectName}/${file}`, 'utf8').toString();
       console.log(`reading ${file}`);
       fileContentJs += fileContent;
     }
@@ -40,11 +37,11 @@ fs.readdirSync(sourceFolder).forEach(file => {
 });
 
 if (fileContentCss) {
-  writeFileSync(targetFileNameCss, fileContentCss, 'utf8');
+  fs.writeFileSync(targetFileNameCss, fileContentCss, 'utf8');
   console.log(`writing ${targetFileNameCss}`);
 }
 if (fileContentJs) {
-  writeFileSync(targetFileNameJs, fileContentJs, 'utf8');
+  fs.writeFileSync(targetFileNameJs, fileContentJs, 'utf8');
   console.log(`writing ${targetFileNameJs}`);
 }
 console.log('finished');
