@@ -14,6 +14,12 @@ const fs = require('fs');
 const sourceFolder = process.argv[2];
 const projectName = process.argv[3];
 
+if (process.argv.length < 4) {
+  console.log('Not enough parameters! Pass source folder and project name.');
+} else {
+  console.log(`Running JS-SCC-Packer in folder: ${sourceFolder} for project: ${projectName}`);
+}
+
 const targetFileNameJs = `src/app/${projectName}/${projectName}.js`;
 const targetFileNameCss = `src/app/${projectName}/${projectName}.css`;
 
