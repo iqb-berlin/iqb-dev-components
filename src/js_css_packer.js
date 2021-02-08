@@ -16,6 +16,7 @@ const projectName = process.argv[3];
 
 if (process.argv.length < 4) {
   console.log('Not enough parameters! Pass source folder and project name.');
+  process.exit(1);
 } else {
   console.log(`Running JS-SCC-Packer in folder: ${sourceFolder} for project: ${projectName}`);
 }
