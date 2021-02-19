@@ -4,7 +4,7 @@ one self contained html file. It includes the source code of all referenced
 files and generates base64 representations for all images, which are included.
 
 Usage:
-node distpacker.js <directory containing html and source files>
+node distpacker.js <directory containing html and source files> <target_filename>
 
 Author:
 - Andreas Fleck
@@ -24,6 +24,7 @@ const folderseperator = '/';
 const debug = true;
 
 let folder = process.argv[2];
+const targetFilename = process.argv[3];
 
 function logDebug(str) {
   if (debug) {
@@ -154,5 +155,5 @@ htmlString = replaceScriptTags(htmlString);
 htmlString = replaceBaseHREF(htmlString);
 
 // write new index.html
-writeFileSync(`${folder}index_packed.html`, htmlString, 'utf8');
-console.log(`finished, wrote packed index_packed.html to: ${folder}`);
+writeFileSync(`${folder}${targetFilename}`, htmlString, 'utf8');
+console.log(`finished, wrote packed ${targetFilename} to: ${folder}`);
