@@ -118,7 +118,7 @@ function replaceCSSLinks(htmlString) {
 function replaceScriptTags(htmlString) {
   // RH: Changed regex to exclude script content without src attribute, i.e. real code
   // const regexJS = /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gim;
-  const regexJS = /<script\s*.*?<\/script>/gim;
+  const regexJS = /<script\s+.*?<\/script>/gim;
   return htmlString.replace(regexJS, (a, b) => {
     console.log('Replacing Script Tag: ', a);
     const regexSRC = /src="(.*?)"/ig; // Attention, global declaration is wrong, because of pointer
