@@ -14,7 +14,7 @@ The DistPacker can be used as a command line tool and needs no installation, oth
 
 #### Usage
 ```
-node distpacker.js <target-dir>
+node distpacker.js <target-dir> <target-filename>
 ```
 
 When used as a depency of a npm project, you can use the path to the node_modules folder.
