@@ -23,8 +23,15 @@ const writeFileSync = fs.writeFileSync;
 const folderseperator = '/';
 const debug = true;
 
-let folder = process.argv[2];
-const targetFilename = process.argv[3];
+const args = process.argv.slice(2);
+if (args.length <= 0) {
+  console.log('Not enough arguments! Pass source folder and optionally target file name!');
+  process.exit(1);
+}
+
+let folder = args[0];
+let targetFilename;
+(args.length > 1) ? targetFilename = args[1] : targetFilename = 'index_packed.html';
 
 function logDebug(str) {
   if (debug) {
