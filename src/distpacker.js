@@ -51,7 +51,7 @@ function getExtension(filename) {
 /** replace img with base64 in css url */
 function replaceUrlInCss(jsString) {
   const regexUrl = /\burl\([^)]+\)/gi; // rebuild regex
-  return jsString.replace(regexUrl, (a, b) => {
+  return jsString.replace(regexUrl, a => {
     console.log('Replacing URL: ', a);
     // skip material icons ?
     if (a.search('#') > -1) {
@@ -113,9 +113,9 @@ function replaceFavicon(htmlString) {
 /** replace existing link-tags with manipulated style-tags */
 function replaceCSSLinks(htmlString) {
   const regexCss = /<link.*href="(.*?.css)".*?>/gi;
-  return htmlString.replace(regexCss, (a, b) => {
-    let cssString = readFileSync(folder + b, 'utf8').toString();
-    logDebug(`Replacing CSS: ${a}`);
+  return htmlString.replace(regexCss, (searchString, foundPath) => {
+    let cssString = readFileSync(folder + foundPath, 'utf8').toString();
+    logDebug(`Replacing CSS: ${searchString}`);
     cssString = replaceUrlInCss(cssString);
     return `<style>${cssString}</style>`;
   });
