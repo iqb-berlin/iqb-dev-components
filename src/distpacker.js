@@ -48,8 +48,12 @@ function getExtension(filename) {
   return (i < 0) ? '' : filename.substr(i + 1);
 }
 
+function getFolderPath(filePath) {
+  return filePath.substring(0, filePath.lastIndexOf('/'));
+}
+
 /** replace img with base64 in css url */
-function replaceUrlInCss(jsString) {
+function replaceUrlInCss(jsString, cssPath) {
   const regexUrl = /\burl\([^)]+\)/gi; // rebuild regex
   return jsString.replace(regexUrl, a => {
     console.log('Replacing URL: ', a);
@@ -60,7 +64,7 @@ function replaceUrlInCss(jsString) {
     const regexFile = /\((.*?)\)/ig;
     const src = regexFile.exec(a)[1].replace(/\'/gi, '').replace(/\"/gi, '').replace('./', '');
     const ext = getExtension(src);
-    const file = folder + src;
+    const file = `${folder}${getFolderPath(cssPath)}/${src}`;
     if (existsSync(file)) {
       const base64Str = base64Encode(file);
       return `url(data:image/${ext};base64,${base64Str})`; // ATTENTION with " & '
@@ -115,8 +119,8 @@ function replaceCSSLinks(htmlString) {
   const regexCss = /<link.*href="(.*?.css)".*?>/gi;
   return htmlString.replace(regexCss, (searchString, foundPath) => {
     let cssString = readFileSync(folder + foundPath, 'utf8').toString();
-    logDebug(`Replacing CSS: ${searchString}`);
-    cssString = replaceUrlInCss(cssString);
+    logDebug(`Replacing CSS: ${searchString} - path found: ${foundPath}`);
+    cssString = replaceUrlInCss(cssString, foundPath);
     return `<style>${cssString}</style>`;
   });
 }
