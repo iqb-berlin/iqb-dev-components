@@ -3,7 +3,7 @@ This script packs Javascript and CSS files found in the target directory
 into one single file.
 
 Usage:
-node js_css_packer.js <directory containing files>
+node js_css_packer.js <directory containing files> <sub folder name> <target>
 
 Author:
 - Martin Mechtel (mechtel@iqb.hu-berlin.de)
@@ -11,16 +11,16 @@ Author:
 */
 const fs = require('fs');
 
+if (process.argv.length < 5) {
+  console.log('Not enough parameters. ' +
+    'Pass source folder, project name and target folder!\n' +
+    'Example: node js_css_packer.js dist verona-editor-aspect dist');
+  process.exit(1);
+}
+
 const sourceFolder = process.argv[2];
 const projectName = process.argv[3];
 const targetFolder = process.argv[4];
-
-if (process.argv.length < 4) {
-  console.log('Not enough parameters! Pass source folder and project name.');
-  process.exit(1);
-} else {
-  console.log(`Running JS-SCC-Packer in folder: ${sourceFolder} for project: ${projectName}`);
-}
 
 const targetFileNameJs = `${targetFolder}/${projectName}.js`;
 const targetFileNameCss = `${targetFolder}/${projectName}.css`;
