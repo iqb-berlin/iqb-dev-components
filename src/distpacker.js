@@ -57,8 +57,10 @@ function replaceUrlInCss(jsString, cssPath) {
   const regexUrl = /\burl\([^)]+\)/gi; // rebuild regex
   return jsString.replace(regexUrl, a => {
     console.log('Replacing URL: ', a);
-    // skip material icons ?
-    if (a.search('#') > -1) {
+    // List of illegal file chars: ~ “ # % & * : < > ? / \ { | }
+    // : / \ are path delimiters
+    // If one of the other characters is found, a must be a variable and must not be replaced.
+    if (a.search(/~|"|#|%|\*|\<|\>|\?|{|}|\|/) > -1) {
       return a;
     }
     const regexFile = /\((.*?)\)/ig;
