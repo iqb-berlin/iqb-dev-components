@@ -31,7 +31,9 @@ if (args.length <= 0) {
 
 let folder = args[0];
 let targetFilename;
+let subfolder;
 (args.length > 1) ? targetFilename = args[1] : targetFilename = 'index_packed.html';
+(args.length > 2) ? subfolder = args[2] : subfolder = '';
 
 function logDebug(str) {
   if (debug) {
@@ -89,9 +91,9 @@ function replaceLinkedAssetsInJS(jsString) {
     const ext = getExtension(b);
 
     try {
-      const file = folder + src;
+      const file = folder + subfolder + src;
       if (existsSync(file)) {
-        const base64Str = base64Encode(folder + src);
+        const base64Str = base64Encode(file);
         if (firstSign === '"') {
           return '"data:image/' + ext + ';base64,' + base64Str + '"'; // ATTENTION with " & '
         }
@@ -155,6 +157,10 @@ function replaceBaseHREF(htmlString) {
 
 if (!folder.endsWith(folderseperator)) {
   folder += folderseperator;
+}
+
+if (subfolder !== '' && !subfolder.endsWith(folderseperator)) {
+  subfolder += folderseperator;
 }
 
 console.log(`Running iqb-distpacker in folder: ${folder}`);
