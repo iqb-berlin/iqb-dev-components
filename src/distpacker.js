@@ -62,7 +62,7 @@ function replaceUrlInCss(jsString, cssPath) {
     // List of illegal file chars: ~ “ # % & * : < > ? / \ { | }
     // : / \ are path delimiters
     // If one of the other characters is found, a must be a variable and must not be replaced.
-    if (a.search(/~|"|#|%|\*|\<|\>|\?|{|}|\|/) > -1) {
+    if (a.search(/[~|"|#|%|*|<|>|?|{|}||]/) > -1) {
       return a;
     }
     const regexFile = /\((.*?)\)/ig;
