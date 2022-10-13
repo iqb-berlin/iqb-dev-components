@@ -82,7 +82,7 @@ function replaceUrlInCss(jsString, cssPath) {
 function replaceLinkedAssetsInJS(jsString) {
   // RH: old variant. Prefixes "asstes" with "./". Dont know why.
   // const regexAssets = /['|"]\.\/assets(.*?)['|"]/gi;
-  const regexAssets = /['|"]assets(.*?)['|"]/gi;
+  const regexAssets = /['|"]assets\/(.*?)['|"]/gi; // replace assets only if followed by a slash (s. GeoGebra-Bug)
   return jsString.replace(regexAssets, (a, b) => {
     logDebug(`Replacing linked assets in JS: ${a}`);
 
